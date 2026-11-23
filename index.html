@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEUROPSY - Neural PSY gen</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%2303020a' stroke='%2300f5d4' stroke-width='8'/><circle cx='50' cy='50' r='16' fill='%23ff007f'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4" />
+</head>
+<body>
+  <!-- 60 FPS 3D Plasma Vortex, Bass Terrain & Fibonacci Visualizer -->
+  <canvas id="psy-canvas"></canvas>
+  <div class="cyber-vignette"></div>
+
+  <div class="hud-wrapper">
+    <!-- Top Header: Brand, Track Info Deck Strip & Visual Mode Switcher -->
+    <header class="top-deck-bar">
+      <div class="brand-block">
+        <div class="pulse-orb"></div>
+        <div>
+          <div class="brand-title">NeuroPSY</div>
+        </div>
+      </div>
+
+      <!-- Compact Floating Track & Dual-Deck Crossfader Strip (Leaves Center Stage Open!) -->
+      <div class="track-header-card" id="track-card">
+        <div class="track-top-row">
+          <span class="subgenre-badge" id="subgenre-badge">Full On (TIP World)</span>
+          <span class="telemetry-tag" id="pill-bpm">145 BPM</span>
+          <span class="telemetry-tag" id="pill-bar">BAR 1</span>
+          <span class="telemetry-tag status-tag" id="pill-status">LIVE</span>
+        </div>
+        <h1 class="track-title" id="track-title">CLAUDE OPUS</h1>
+        <div class="track-meta">
+          <span>KEY: <strong id="meta-key">E Minor</strong></span>
+          <span>SCALE: <strong id="meta-scale">Phrygian Dominant (Goa)</strong></span>
+          <span>GROOVE: <strong id="meta-bass">Classic Rolling K-B-B-B</strong></span>
+        </div>
+        <div class="deck-morph-row">
+          <span class="deck-tag active" id="deck-a-tag">DECK A</span>
+          <div class="crossfade-track">
+            <div class="crossfade-fill" id="crossfade-fill"></div>
+          </div>
+          <span class="deck-tag" id="deck-b-tag">DECK B</span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn-vis-mode" id="btn-vis-mode" title="Change visual">
+          ◈ VISUAL: <span id="vis-mode-label">PLASMA VORTEX 3D</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Open Center Viewport so the 3D Plasma Vortex & Shockwaves shine unobstructed -->
+    <main class="center-stage">
+      <div class="cta-floating-dock">
+        <button class="btn-secondary" id="btn-play-toggle">Stop PSY</button>
+        <button class="btn-change-mix" id="btn-change-mix">
+          <span class="mix-icon">✦</span>
+          <span id="btn-change-mix-text">MIX</span>
+        </button>
+        <button class="btn-secondary active-toggle" id="btn-autopilot">AUTO-MIX: ON</button>
+      </div>
+    </main>
+
+    <!-- Bottom DJ Console: Live Bass Key Selector + 16-Step Matrix + Acid Macros -->
+    <footer class="bottom-console">
+      <!-- Panel 1: Live Bass Key &amp Octave Selector -->
+      <div class="console-panel">
+        <div class="panel-header">
+          <span>TONALITY &amp PITCH</span>
+          <strong id="active-key-indicator">MODE: E</strong>
+        </div>
+        <div class="key-keyboard" id="key-keyboard">
+          <!-- Populated dynamically with C, C#, D, D#, E, F, F#, G, G#, A, A#, B -->
+        </div>
+        <div class="octave-row">
+          <span class="octave-label">BASS:</span>
+          <button class="btn-octave" data-octave="-1">-1 OCT)</button>
+          <button class="btn-octave active" data-octave="0">STANDARD (0)</button>
+          <button class="btn-octave" data-octave="1">+1 OCT</button>
+        </div>
+      </div>
+
+      <!-- Panel 2: 16-Step Real-Time Matrix -->
+      <div class="console-panel">
+        <div class="panel-header">
+          <span>DRUMS:</span>
+          <strong>NOW</strong>
+        </div>
+        <div class="step-grid" id="step-grid"></div>
+      </div>
+
+      <!-- Panel 3: Acid 303 & Alien Project FX Macros -->
+      <div class="console-panel">
+        <div class="panel-header">
+          <span>SYNTH &amp; LEAD</span>
+          <strong>303 &amp; MELODY</strong>
+        </div>
+        <div class="macros-grid">
+          <div class="macro-control">
+            <div class="macro-label">
+              <span>CutOff</span>
+              <span id="val-cutoff">100%</span>
+            </div>
+            <input type="range" id="slider-cutoff" min="0.35" max="2.4" step="0.05" value="1.0" />
+          </div>
+          <div class="macro-control">
+            <div class="macro-label">
+              <span>RESONANCE</span>
+              <span id="val-resonance">11.5 Q</span>
+            </div>
+            <input type="range" id="slider-resonance" min="2.0" max="22.0" step="0.5" value="11.5" />
+          </div>
+          <div class="macro-control">
+            <div class="macro-label">
+              <span>LEAD / MELODY</span>
+              <span id="val-fx">100%</span>
+            </div>
+            <input type="range" id="slider-fx" min="0.1" max="1.8" step="0.05" value="1.0" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="app.js?v=10"></script>
+</body>
+</html>
